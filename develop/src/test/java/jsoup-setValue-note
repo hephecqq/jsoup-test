@@ -1,0 +1,16 @@
+设置属性的值
+问题
+在你解析一个Document之后可能想修改其中的某些属性值，然后再保存到磁盘或都输出到前台页面。
+
+方法
+可以使用属性设置方法 Element.attr(String key, String value), 和 Elements.attr(String key, String value).
+
+假如你需要修改一个元素的 class 属性，可以使用 Element.addClass(String className) 和 Element.removeClass(String className) 方法。
+
+Elements 提供了批量操作元素属性和class的方法，比如：要为div中的每一个a元素都添加一个 rel="nofollow" 可以使用如下方法：
+
+doc.select("div.comments a").attr("rel", "nofollow");
+说明
+与Element中的其它方法一样，attr 方法也是返回当 Element (或在使用选择器是返回 Elements 集合)。这样能够很方便使用方法连用的书写方式。比如：
+
+doc.select("div.masthead").attr("title", "jsoup").addClass("round-box");

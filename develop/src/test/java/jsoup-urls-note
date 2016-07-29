@@ -1,0 +1,41 @@
+处理URLs
+问题
+你有一个包含相对URLs路径的HTML文档，需要将这些相对路径转换成绝对路径的URLs。
+
+方法
+在你解析文档时确保有指定base URI，然后
+使用 abs: 属性前缀来取得包含base URI的绝对路径。代码如下： 
+Document doc = Jsoup.connect("http://www.open-open.com").get();
+
+Element link = doc.select("a").first();
+String relHref = link.attr("href"); // == "/"
+String absHref = link.attr("abs:href"); // "http://www.open-open.com/"
+说明
+在HTML元素中，URLs经常写成相对于文档位置的相对路径： <a href="/download">...</a>. 当你使用 Node.attr(String key) 方法来取得a元素的href属性时，它将直接返回在HTML源码中指定定的值。
+
+假如你需要取得一个绝对路径，需要在属性名前加 abs: 前缀。这样就可以返回包含根路径的URL地址attr("abs:href")
+
+因此，在解析HTML文档时，定义base URI非常重要。
+
+如果你不想使用abs: 前缀，还有一个方法能够实现同样的功能 Node.absUrl(String key)。
+
+Cookbook 目录
+入门
+解析和遍历一个html文档
+输入
+解析一个html字符串
+解析一个body片断
+从一个URL加载一个Document对象
+根据一个文件加载Document对象
+数据抽取
+使用dom方法来遍历一个Document对象
+使用选择器语法来查找元素
+从元素集合抽取属性、文本和html内容
+URL处理
+程序示例：获取所有链接
+数据修改
+设置属性值
+设置元素的html内容
+设置元素的文本内容
+HTML清理
+消除不受信任的html (来防止xss攻击)

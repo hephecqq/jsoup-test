@@ -1,0 +1,41 @@
+使用DOM方法来遍历一个文档
+问题
+你有一个HTML文档要从中提取数据，并了解这个HTML文档的结构。
+
+方法
+将HTML解析成一个Document之后，就可以使用类似于DOM的方法进行操作。示例代码：
+
+File input = new File("/tmp/input.html");
+Document doc = Jsoup.parse(input, "UTF-8", "http://example.com/");
+
+//通过HTML的DOM标准方式来解析HTML页面
+Element content = doc.getElementById("content");
+Elements links = content.getElementsByTag("a");
+for (Element link : links) {
+  String linkHref = link.attr("href");
+  String linkText = link.text();
+}
+说明
+Elements这个对象提供了一系列类似于DOM的方法来查找元素，抽取并处理其中的数据。具体如下：
+
+查找元素
+getElementById(String id)
+getElementsByTag(String tag)
+getElementsByClass(String className)
+getElementsByAttribute(String key) (and related methods)
+Element siblings: siblingElements(), firstElementSibling(), lastElementSibling(); nextElementSibling(), previousElementSibling()
+Graph: parent(), children(), child(int index)
+元素数据
+attr(String key)获取属性attr(String key, String value)设置属性
+attributes()获取所有属性
+id(), className() and classNames()
+text()获取文本内容text(String value) 设置文本内容
+html()获取元素内HTMLhtml(String value)设置元素内的HTML内容
+outerHtml()获取元素外HTML内容
+data()获取数据内容（例如：script和style标签)
+tag() and tagName()
+操作HTML和文本
+append(String html), prepend(String html)
+appendText(String text), prependText(String text)
+appendElement(String tagName), prependElement(String tagName)
+html(String value)
