@@ -20,7 +20,8 @@ public class JsoupTest {
 	@Test
 	public void test() throws IOException{
 		//BlogBody();
-		article();
+		//article();
+		Blog();
 	}
 	
 	/**
@@ -58,5 +59,17 @@ public class JsoupTest {
                  System.out.println(linkText);
 		}
 	}
+	}
+	/**
+	 * 获取指定博客文章的内容
+	 * @throws IOException 
+	 */
+	public static void Blog() throws IOException{
+		Document doc;
+		doc = Jsoup.connect("http://www.cnblogs.com/zyw-205520/archive/2012/12/20/2826402.html").get();
+		Elements listDiv=doc.getElementsByAttributeValue("class", "postBody");
+		for (Element element : listDiv) {
+			System.out.println(element.html());
+		}
 	}
 }
